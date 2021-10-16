@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    </head>
+
+    <head th:fragment="js">
+        <meta charset="UTF-8">
+        <title> Home </title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+
+</body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-warning bg-warning">
+    <a class="navbar-brand font-weight-bold text-light" href="/">SIELEKTHOR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto" th:with="view=${#httpServletRequest.getServletPath()}">
+            <a th:classappend="${#strings.startsWith(view,'/barang')? 'font-weight-bold' : ''}"
+                class="nav-item nav-link text-dark" th:href="@{/barang}">
+                Barang<span class="sr-only"></span>
+            </a>
+
+            <a th:classappend="${#strings.startsWith(view,'/pembelian')? 'font-weight-bold' : ''}"
+                class="nav-item nav-link text-dark" th:href="@{/pembelian}">
+                Pembelian<span class="sr-only"></span>
+            </a>
+
+            <a th:classappend="${#strings.equals(view,'/member')? 'font-weight-bold' : ''}"
+                class="nav-item nav-link  text-dark" th:href="@{/member}">
+                Member<span class="sr-only"></span>
+            </a>
+
+            <a th:classappend="${#strings.equals(view,'/filter-pembelian')? 'font-weight-bold' : ''}"
+                class="nav-item nav-link  text-dark" th:href="@{/filter-pembelian}">
+                Filter Pembelian<span class="sr-only"></span>
+            </a>
+
+            <a th:classappend="${#strings.equals(view,'/filter-barang')? 'font-weight-bold' : ''}"
+                class="nav-item nav-link  text-dark" th:href="@{/filter-barang}">
+                Filter Barang<span class="sr-only"></span>
+            </a>
+
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0" th:action="@{/member/view}" method="GET">
+            <input class="form-control mr-sm-2" type="search" name="idMember" placeholder="Id Member" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    </div>
+</nav>
+
+<!-- <footer th:fragment="footer" class="justify-content-center justify-content-lg-between border-top p-4 border-bottom">
+    
+    <p><b>Anda berada di halaman: </b></p>
+    <p th:text="${#httpServletRequest.getRequestURI().toString.contains('/agensi/')?'View All Agensi':''}"></p>
+    <p th:text="${#httpServletRequest.getRequestURI().toString.contains('/destinasi/')?'View All Destinasi':''}"></p>
+    
+</footer> -->
+
+</body>
+
+</html>

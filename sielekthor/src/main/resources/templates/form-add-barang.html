@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIELEKTHOR</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head> -->
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <div class="card m-4 p-4">
+            <div class="card-bod">
+                <div class="justify-content-center">
+                    <h2>Tambah Barang</h2>
+                    <br>
+                    <form th:action="@{/barang/tambah}" th:object="${barang}" method="POST">
+                        Nama Barang : <br>
+                        <input class="form-control" type="text" name="namaBarang" th:value="*{namaBarang}" />
+                        <br><br>
+
+                        Kode Barang: <br>
+                        <input class="form-control" type="text" name="kodeBarang" th:value="*{kodeBarang}" />
+                        <br><br>
+
+                        Merk Barang : <br>
+                        <input class="form-control" type="text" name="merkBarang" th:value="*{merkBarang}" />
+                        <br><br>
+
+                        Stok Barang : <br>
+                        <input class="form-control" type="text" name="stokBarang" th:value="*{stokBarang}" />
+                        <br><br>
+
+                        Garansi Toko : <br>
+                        <input class="form-control" type="text" name="jumlahGaransi" th:value="*{jumlahGaransi}" />
+                        <br><br>
+
+                        Deskripsi Barang : <br>
+                        <input class="form-control" type="text" name="deskripsiBarang" th:value="*{deskripsiBarang}" />
+                        <br><br>
+
+                        Tipe Barang : <br>
+                        <select class="form-control" th:field="*{tipe}">
+                            <option value="">Pilih Tipe</option>
+                            <option th:each="tipe : ${listTipe}" th:value="${tipe.idTipe}" th:text="${tipe.namaTipe}">
+                            </option>
+                        </select>
+                        <br><br>
+
+                        Harga Barang : <br>
+                        <input class="form-control" type="text" name="hargaBarang" th:value="*{hargaBarang}" />
+                        <br><br>
+
+                        <a href="/barang/viewall" class="btn btn-light btn-outline-warning">Batal</a>
+                        <button class="btn btn-warning btn-outline-light" type="submit" name="submitBarang"
+                            value="submitBarang">Submit</button>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

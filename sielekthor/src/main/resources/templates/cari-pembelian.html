@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SIELEKTHOR</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head> -->
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <div class="card m-4 p-4">
+            <div class="card-bod">
+                <div class="justify-content-center">
+                    <center>
+                        <h2>Cari Pembelian</h2>
+                    </center>
+                    <br>
+
+                    <form th:action="@{/pembelian/cari}" method="GET">
+
+                        Member : <br>
+                        <select class="form-control" name="idMember">
+                            <option th:each="member : ${listMember}" th:value="${member.idMember}"
+                                th:text="${member.namaMember}"></option>
+                        </select>
+
+                        <br><br>
+                        Metode Pembayaran : <br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="isCash" id="flexRadioDefault1" value="0"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Tunai
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="isCash" id="flexRadioDefault2" value="1"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Cicil
+                            </label>
+                        </div>
+
+                        <br>
+                        <br>
+                        <a href="/" class="btn btn-light btn-outline-warning">Kembali</a>
+                        <button class="btn btn-warning btn-outline-light" type="submit">Cari</button>
+
+                    </form>
+
+                    <br>
+
+                    <div th:if="${listPembelian.size() != 0}">
+
+                        <br>
+
+                        <table class="table table-striped">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>No</th>
+                                    <th>No Invoice</th>
+                                    <th>Total Harga</th>
+                                    <th>Member</th>
+                                    <th>Jumlah Pembelian</th>
+                                    <th>Tanggal Pembelian</th>
+                                    <th style="text-align: center;">Aksi</th>
+                                </tr>
+
+                            <tbody>
+                                <tr th:each="pembelian, iterationStatus : ${listPembelian}">
+                                    <td th:text="${iterationStatus.count}"></td>
+                                    <td th:text="${pembelian.noInvoice}"></td>
+                                    <td th:text="Rp+${pembelian.totalPembelian}"></td>
+                                    <td th:text="${pembelian.member.namaMember}"></td>
+                                    <td th:text="${pembelian.listPembelianBarang.size()}"></td>
+                                    <td th:text="${pembelian.tanggalPembelian}"></td>
+                                    <td>
+                                        <center><a th:href="@{/pembelian/} + ${pembelian.idPembelian}"
+                                                class="btn btn-info">Lihat</a>
+                                            <form th:action="@{/pembelian/hapus/} + ${pembelian.idPembelian}"
+                                                th:object="${pembelian}" method="POST">
+                                                <button type="submit" name="submit"
+                                                    class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            </thead>
+                        </table>
+
+                        <br><br>
+                        <a href="/" class="btn btn-light btn-outline-warning">Kembali</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

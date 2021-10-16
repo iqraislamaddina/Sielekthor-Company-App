@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>SIELEKTHOR</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head> -->
+
+<body>
+  <nav th:replace="fragments/fragment :: navbar"></nav>
+  <div class="container">
+    <div class="card m-4 p-4">
+      <div class="card-bod">
+        <div class="justify-content-center">
+          <h2>Tambah Member</h2>
+          <br>
+          <form th:action="@{/member/tambah}" th:object="${member}" method="POST">
+            Nama Member : <br>
+            <input class="form-control" type="text" name="namaMember" th:value="*{namaMember}" />
+            <br><br>
+
+            Tanggal Lahir : <br>
+            <input class="form-control" type="date" name="tanggalLahir" th:value="*{tanggalLahir}" />
+            <br><br>
+
+            Tanggal Pendaftaran : <br>
+            <input class="form-control" type="datetime-local" name="tanggalPendaftaran"
+              th:value="*{tanggalPendaftaran}" />
+            <br><br>
+
+            Jenis Kelamin: <br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenisKelamin" id="flexRadioDefault1" value="0" checked>
+              <label class="form-check-label" for="flexRadioDefault1">
+                Laki-laki
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="jenisKelamin" id="flexRadioDefault2" value="1" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Perempuan
+              </label>
+            </div>
+
+            <a href="/member" class="btn btn-light btn-outline-warning">Batal</a>
+            <button class="btn btn-warning btn-outline-light" type="submit" name="submit" value="submit">Submit</button>
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

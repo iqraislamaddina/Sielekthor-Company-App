@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pembelian</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <br><br>
+        <h2 style="text-align: center">Daftar Pembelian</h2>
+        <br><br>
+        <a th:href="@{/pembelian/tambah/}" class="btn btn-warning font-weight-bold">+ Tambah Pembelian</a>
+        <br><br>
+        <table class="table table-striped">
+            <thead class="table-warning">
+                <tr>
+                    <th>No</th>
+                    <th>No Invoice</th>
+                    <th>Total Harga</th>
+                    <th>Member</th>
+                    <th>Jumlah Pembelian</th>
+                    <th>Tanggal Pembelian</th>
+                    <th style="text-align: center;">Aksi</th>
+                </tr>
+
+            <tbody>
+                <tr th:each="pembelian, iterationStatus : ${listPembelian}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${pembelian.noInvoice}"></td>
+                    <td th:text="Rp+${pembelian.totalPembelian}"></td>
+                    <td th:text="${pembelian.member.namaMember}"></td>
+                    <td th:text="${pembelian.listPembelianBarang.size()}"></td>
+                    <td th:text="${pembelian.tanggalPembelian}"></td>
+                    <td>
+                        <center><a th:href="@{/pembelian/} + ${pembelian.idPembelian}" class="btn btn-info">Lihat</a>
+                            <form th:action="@{/pembelian/hapus/} + ${pembelian.idPembelian}" th:object="${pembelian}"
+                                method="POST">
+                                <button type="submit" name="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+            </thead>
+        </table>
+    </div>
+    <!-- <footer th:replace="fragments/fragment :: footer"></footer> -->
+</body>
+
+</html>
